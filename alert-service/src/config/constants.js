@@ -1,4 +1,5 @@
 const ALERT_TYPES = {
+  EXPIRED: "EXPIRED",
   LOW_STOCK: "LOW_STOCK",
 };
 

@@ -1,10 +1,12 @@
 const { Router } = require("express");
+const expiringSoonAlertController = require("../controllers/expiringSoonAlertController");
 const expiredAlertController = require("../controllers/expiredAlertController");
 const lowStockAlertController = require("../controllers/lowStockAlertController");
 const outOfStockAlertController = require("../controllers/outOfStockAlertController");
 
 const router = Router();
 
+router.get("/api/alerts/expiring-soon", expiringSoonAlertController.getExpiringSoonAlerts);
 router.get("/api/alerts/expired", expiredAlertController.getExpiredAlerts);
 router.get("/api/alerts/low-stock", lowStockAlertController.getLowStockAlerts);
 router.get("/api/alerts/out-of-stock", outOfStockAlertController.getOutOfStockAlerts);

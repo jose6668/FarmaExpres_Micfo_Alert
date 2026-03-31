@@ -6,6 +6,9 @@ const env = {
   port: Number(process.env.PORT || 8083),
   serviceName: process.env.SERVICE_NAME || "FarmaExpres_Micro_Alert",
   nodeEnv: process.env.NODE_ENV || "development",
+  inventory: {
+    productsTable: process.env.INVENTORY_PRODUCTS_TABLE || "product",
+  },
   database: {
     host: process.env.DB_HOST || "localhost",
     port: Number(process.env.DB_PORT || 5432),

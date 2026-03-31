@@ -6,8 +6,7 @@
 - **Nombre:** Creacion base del microservicio `alert-service`
 - **Microservicio:** `alert-service`
 - **Prioridad:** Alta
-- **Rama sugerida:** `feature/HU-001-alert-service-status`
-- **Rama padre:** `develop`
+- **Rama sugerida:** `HU-001-alert-service-status`
 - **Estado:** Pendiente
 
 ## Observacion previa

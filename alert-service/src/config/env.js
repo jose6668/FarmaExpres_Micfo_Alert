@@ -1,0 +1,21 @@
+const dotenv = require("dotenv");
+
+dotenv.config();
+
+const env = {
+  port: Number(process.env.PORT || 8083),
+  serviceName: process.env.SERVICE_NAME || "FarmaExpres_Micro_Alert",
+  nodeEnv: process.env.NODE_ENV || "development",
+  database: {
+    host: process.env.DB_HOST || "localhost",
+    port: Number(process.env.DB_PORT || 5432),
+    name: process.env.DB_NAME || "farmaexpres_inventory",
+    user: process.env.DB_USER || "postgres",
+    password: process.env.DB_PASSWORD || "1234",
+    ssl: String(process.env.DB_SSL || "false").toLowerCase() === "true",
+  },
+};
+
+module.exports = {
+  env,
+};

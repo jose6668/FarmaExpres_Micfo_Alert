@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
-    "test": "node tests/status.test.js"
+    "test": "node tests/status.test.js && node tests/lowStockAlerts.test.js"
   },
   "keywords": [
     "farmaexpres",

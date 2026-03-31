@@ -18,6 +18,11 @@ Microservicio `alert-service` de FarmaExpres.
 - `GET /status`
 - Puerto por defecto: `8083`
 
+## Endpoints
+
+- `GET /status`
+- `GET /api/alerts/low-stock`
+
 ### Respuesta esperada
 
 ```json
@@ -25,6 +30,31 @@ Microservicio `alert-service` de FarmaExpres.
   "status": "UP",
   "service": "FarmaExpres_Micro_Alert",
   "timestamp": "2026-03-31T14:54:17.592Z"
+}
+```
+
+### Respuesta esperada de alertas
+
+```json
+{
+  "generatedAt": "2026-03-31T15:12:43.021Z",
+  "total": 1,
+  "alerts": [
+    {
+      "type": "LOW_STOCK",
+      "severity": "MEDIUM",
+      "message": "Producto bajo stock minimo: Acetaminofen 500mg",
+      "product": {
+        "id": "12",
+        "code": "MED-001",
+        "name": "Acetaminofen 500mg",
+        "stock": 7,
+        "minimumStock": 8,
+        "expirationDate": "2027-06-15",
+        "active": true
+      }
+    }
+  ]
 }
 ```
 

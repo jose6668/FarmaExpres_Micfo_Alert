@@ -22,6 +22,7 @@ Microservicio `alert-service` de FarmaExpres.
 
 - `GET /status`
 - `GET /api/alerts/low-stock`
+- `GET /api/alerts/expired`
 
 ### Respuesta esperada
 
@@ -51,6 +52,31 @@ Microservicio `alert-service` de FarmaExpres.
         "stock": 7,
         "minimumStock": 8,
         "expirationDate": "2027-06-15",
+        "active": true
+      }
+    }
+  ]
+}
+```
+
+### Respuesta esperada de productos vencidos
+
+```json
+{
+  "generatedAt": "2026-03-31T15:13:16.316Z",
+  "total": 2,
+  "alerts": [
+    {
+      "type": "EXPIRED",
+      "severity": "HIGH",
+      "message": "Producto vencido: Acetaminofén 500mg",
+      "product": {
+        "id": "13",
+        "code": "M-001",
+        "name": "Acetaminofén 500mg",
+        "stock": 7,
+        "minimumStock": 8,
+        "expirationDate": "2026-01-15",
         "active": true
       }
     }

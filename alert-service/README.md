@@ -23,6 +23,7 @@ Microservicio `alert-service` de FarmaExpres.
 - `GET /status`
 - `GET /api/alerts/low-stock`
 - `GET /api/alerts/expired`
+- `GET /api/alerts/out-of-stock`
 
 ### Respuesta esperada
 
@@ -77,6 +78,31 @@ Microservicio `alert-service` de FarmaExpres.
         "stock": 7,
         "minimumStock": 8,
         "expirationDate": "2026-01-15",
+        "active": true
+      }
+    }
+  ]
+}
+```
+
+### Respuesta esperada de productos sin stock
+
+```json
+{
+  "generatedAt": "2026-03-31T15:13:32.490Z",
+  "total": 1,
+  "alerts": [
+    {
+      "type": "OUT_OF_STOCK",
+      "severity": "HIGH",
+      "message": "Producto sin stock: Acetaminofén 500mg",
+      "product": {
+        "id": "16",
+        "code": "Masd-001",
+        "name": "Acetaminofén 500mg",
+        "stock": 0,
+        "minimumStock": 8,
+        "expirationDate": "2026-03-31",
         "active": true
       }
     }

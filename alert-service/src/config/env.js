@@ -8,6 +8,7 @@ const env = {
   nodeEnv: process.env.NODE_ENV || "development",
   inventory: {
     productsTable: process.env.INVENTORY_PRODUCTS_TABLE || "product",
+    expiringSoonDays: Number(process.env.EXPIRING_SOON_DAYS || 15),
   },
   database: {
     host: process.env.DB_HOST || "localhost",

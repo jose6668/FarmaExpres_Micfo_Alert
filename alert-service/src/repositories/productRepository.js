@@ -43,7 +43,29 @@ async function findExpiredProducts() {
   return result.rows;
 }
 
+async function findOutOfStockProducts() {
+  const pool = getPool();
+  const query = `
+    SELECT
+      id,
+      code,
+      name,
+      stock,
+      minimumstock AS "minimumStock",
+      expirationdate AS "expirationDate",
+      asset AS active
+    FROM ${env.inventory.productsTable}
+    WHERE asset = TRUE
+      AND stock = 0
+    ORDER BY name ASC
+  `;
+
+  const result = await pool.query(query);
+  return result.rows;
+}
+
 module.exports = {
   findExpiredProducts,
   findLowStockProducts,
+  findOutOfStockProducts,
 };

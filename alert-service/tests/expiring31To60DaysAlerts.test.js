@@ -6,26 +6,27 @@ const productRepository = require("../src/repositories/productRepository");
 const { app } = require("../src/app");
 const { getDaysUntilDate } = require("../src/utils/dateUtils");
 
-test("GET /api/alerts/expiring-soon returns expiring soon alert collection", async () => {
-  const originalFindExpiringSoonProducts = productRepository.findExpiringSoonProducts;
+test("GET /api/alerts/expiring-month returns expiring alerts between 31 and 60 days", async () => {
+  const originalFindProductsExpiringBetweenDays =
+    productRepository.findProductsExpiringBetweenDays;
 
-  productRepository.findExpiringSoonProducts = async () => [
+  productRepository.findProductsExpiringBetweenDays = async () => [
     {
-      id: 33,
-      code: "EXP-001",
-      name: "Loratadina 10 mg",
-      stock: 12,
-      minimumStock: 5,
-      expirationDate: "2026-04-10",
+      id: 51,
+      code: "EXP-3160-001",
+      name: "Vitamina C 1 g",
+      stock: 25,
+      minimumStock: 8,
+      expirationDate: "2026-05-10",
       active: true,
     },
     {
-      id: 34,
-      code: "EXP-002",
-      name: "Diclofenaco 50 mg",
-      stock: 8,
-      minimumStock: 4,
-      expirationDate: "2026-04-14",
+      id: 52,
+      code: "EXP-3160-002",
+      name: "Omeprazol 20 mg",
+      stock: 14,
+      minimumStock: 6,
+      expirationDate: "2026-05-25",
       active: true,
     },
   ];
@@ -37,7 +38,7 @@ test("GET /api/alerts/expiring-soon returns expiring soon alert collection", asy
   try {
     const response = await new Promise((resolve, reject) => {
       http.get(
-        `http://127.0.0.1:${address.port}/api/alerts/expiring-soon`,
+        `http://127.0.0.1:${address.port}/api/alerts/expiring-month`,
         (result) => {
           let body = "";
 
@@ -58,18 +59,19 @@ test("GET /api/alerts/expiring-soon returns expiring soon alert collection", asy
     assert.equal(response.statusCode, 200);
     assert.ok(Date.parse(response.body.generatedAt));
     assert.equal(response.body.total, 2);
-    assert.equal(response.body.alerts[0].type, "EXPIRING_SOON");
-    assert.equal(response.body.alerts[0].product.code, "EXP-001");
-    assert.equal(response.body.alerts[0].product.expirationDate, "2026-04-10");
+    assert.equal(response.body.alerts[0].type, "EXPIRING_31_60_DAYS");
+    assert.equal(response.body.alerts[0].product.code, "EXP-3160-001");
+    assert.equal(response.body.alerts[0].product.expirationDate, "2026-05-10");
     assert.equal(
       response.body.alerts[0].product.diasRestantes,
-      getDaysUntilDate("2026-04-10"),
+      getDaysUntilDate("2026-05-10"),
     );
-    assert.equal(response.body.alerts[0].product.estado, "Critico");
-    assert.equal(response.body.alerts[1].type, "EXPIRING_SOON");
-    assert.equal(response.body.alerts[1].product.code, "EXP-002");
+    assert.equal(response.body.alerts[0].product.estado, "Controlado");
+    assert.equal(response.body.alerts[1].type, "EXPIRING_31_60_DAYS");
+    assert.equal(response.body.alerts[1].product.code, "EXP-3160-002");
   } finally {
-    productRepository.findExpiringSoonProducts = originalFindExpiringSoonProducts;
+    productRepository.findProductsExpiringBetweenDays =
+      originalFindProductsExpiringBetweenDays;
 
     await new Promise((resolve, reject) => {
       server.close((error) => {
